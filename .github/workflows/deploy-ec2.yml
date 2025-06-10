@@ -10,14 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Validate CloudFormation Template
+        run: aws cloudformation validate-template --template-body file://infra/cloudformation/ec2-instance.yaml
+
       - name: Deploy EC2
         run: |
+          set -o pipefail
           aws cloudformation deploy \
             --template-file infra/cloudformation/ec2-instance.yaml \
             --stack-name devops-github-ec2-stack \
