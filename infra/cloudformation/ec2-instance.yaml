@@ -24,7 +24,7 @@ DevOpsEC2Instance:
    Type: AWS::EC2::Instance
    Properties:
      InstanceType: t2.micro
-     ImageId: ami-0abcdef1234567890  # Pakeiskite į naujausią Amazon Linux 2 AMI eu-west-1 regione
+     ImageId: ami-05d3e0186c058c4dd  # Pakeiskite į naujausią Amazon Linux 2 AMI eu-west-1 regione
      IamInstanceProfile: !Ref DevOpsInstanceProfile
      KeyName: sshtoweb
      SecurityGroupIds:
