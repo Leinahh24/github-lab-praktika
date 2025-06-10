@@ -15,7 +15,22 @@ Resources:
        - arn:aws:iam::aws:policy/AmazonS3FullAccess
 
 
- DevOpsInstanceProfile:
+DevOpsInstanceProfile:
    Type: AWS::IAM::InstanceProfile
    Properties:
      Roles:
+     - !Ref DevOpsEC2Role
+DevOpsEC2Instance:
+   Type: AWS::EC2::Instance
+   Properties:
+     InstanceType: t2.micro
+     ImageId: ami-0abcdef1234567890  # Pakeiskite į naujausią Amazon Linux 2 AMI eu-west-1 regione
+     IamInstanceProfile: !Ref DevOpsInstanceProfile
+     KeyName: sshtoweb
+     SecurityGroupIds:
+       - sg-0ec948d15e5095b18  # Iš anksto sukurta SG, leidžianti SSH
+     SubnetId: subnet-08c77a2b3d9889848  # Iš anksto sukurto potinklio ID
+     Tags:
+       - Key: Name
+         Value: DevOps-GitHub-EC2
+
