@@ -15,7 +15,7 @@ Resources:
        - arn:aws:iam::aws:policy/AmazonS3FullAccess
 
 
-DevOpsInstanceProfile:
+ DevOpsInstanceProfile:
    Type: AWS::IAM::InstanceProfile
    Properties:
      Roles:
