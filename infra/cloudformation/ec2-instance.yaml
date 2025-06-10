@@ -1,36 +1,36 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Free Tier EC2 Instance for DevOps Labs3
 Resources:
- DevOpsEC2Role:
-   Type: AWS::IAM::Role
-   Properties:
-     AssumeRolePolicyDocument:
-       Version: '2012-10-17'
-       Statement:
-         - Effect: Allow
-           Principal:
-             Service: ec2.amazonaws.com
-           Action: sts:AssumeRole
-     ManagedPolicyArns:
-       - arn:aws:iam::aws:policy/AmazonS3FullAccess
+  DevOpsEC2Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
 
+  DevOpsInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref DevOpsEC2Role
 
- DevOpsInstanceProfile:
-   Type: AWS::IAM::InstanceProfile
-   Properties:
-     Roles:
-     - !Ref DevOpsEC2Role
-DevOpsEC2Instance:
-   Type: AWS::EC2::Instance
-   Properties:
-     InstanceType: t3.micro
-     ImageId: ami-05d3e0186c058c4dd  # Pakeiskite į naujausią Amazon Linux 2 AMI eu-west-1 regione
-     IamInstanceProfile: !Ref DevOpsInstanceProfile
-     KeyName: sshtoweb
-     SecurityGroupIds:
-       - sg-0ec948d15e5095b18  # Iš anksto sukurta SG, leidžianti SSH
-     SubnetId: subnet-08c77a2b3d9889848  # Iš anksto sukurto potinklio ID
-     Tags:
-       - Key: Name
-         Value: DevOps-GitHub-EC2
+  DevOpsEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t3.micro
+      ImageId: ami-05d3e0186c058c4dd  # Atnaujink, jei reikia
+      IamInstanceProfile: !Ref DevOpsInstanceProfile
+      KeyName: sshtoweb
+      SecurityGroupIds:
+        - sg-0ec948d15e5095b18
+      SubnetId: subnet-08c77a2b3d9889848
+      Tags:
+        - Key: Name
+          Value: DevOps-GitHub-EC2
 
