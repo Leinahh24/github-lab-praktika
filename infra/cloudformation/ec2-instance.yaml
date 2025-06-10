@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Free Tier EC2 Instance for DevOps Labs
+Description: Free Tier EC2 Instance for DevOps Labs3
 Resources:
  DevOpsEC2Role:
    Type: AWS::IAM::Role
