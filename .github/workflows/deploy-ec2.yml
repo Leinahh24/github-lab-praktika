@@ -27,5 +27,4 @@ jobs:
           aws cloudformation deploy \
             --template-file infra/cloudformation/ec2-instance.yaml \
             --stack-name devops-github-ec2-stack \
-            --capabilities CAPABILITY_NAMED_IAM \
-            --debug
+            --capabilities CAPABILITY_NAMED_IAM
