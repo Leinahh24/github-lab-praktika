@@ -1,9 +1,11 @@
 name: Deploy EC2 via CloudFormation
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'infra/cloudformation/ec2-instance.yaml'
+
 
 jobs:
   deploy-ec2:
